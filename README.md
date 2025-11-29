@@ -1,15 +1,16 @@
 # Stability-Analysis-using-Polar-Plot
+
 ## Aim:
 To analyse the stability of the system having open loop transfer function, G(S)=10/(S(1+0.5S)(1+0.2S)) using polar plot and verify it using MATLAB. 
+
 ## Apparatus Required:
 Computer with MATLAB software
 
 ## Theory:
-<img width="517" height="846" alt="image" src="https://github.com/user-attachments/assets/dac7f5db-7362-4b8a-bf91-2ca130f1548c" />
+![WhatsApp Image 2025-11-27 at 18 37 25_076ee6f0](https://github.com/user-attachments/assets/e266a92b-6780-4ce4-af6e-4c6c8bb388a2)
+![WhatsApp Image 2025-11-27 at 18 37 24_b25c1e50](https://github.com/user-attachments/assets/be552fa2-4068-40d2-8594-8b125ecaccf0)
+![WhatsApp Image 2025-11-27 at 18 37 24_20cef8af](https://github.com/user-attachments/assets/acd176cf-a3e9-43db-acef-c68398b55038)
 
-
-## Graph:
-<img width="565" height="846" alt="image" src="https://github.com/user-attachments/assets/56118539-8d42-435d-ad65-322dfeae4668" />
 
 
 ## Procedure:
@@ -21,33 +22,35 @@ Computer with MATLAB software
 	Also determine the stability.
 
 ## Program: 
+
 ```
-num=[1]
-den = conv([1 0], conv([0.5 1], [0.2 1]));
+num=[10]
+den=[0.1 0.7 1 0]
 sys=tf(num,den)
-w=logspace(-1,2,1000);
-[mag phase]=bode(sys,w);
-mag=squeeze(mag);
-phase=squeeze(phase);
-theta=deg2rad(phase);
-polarplot(theta,mag,'LineWidth',1.5)
-[gm pm wpc wgc]=margin(sys)
-if (wpc>wgc)
+[mag,phase,W]=bode(sys)
+mag=squeeze(mag)
+phase=squeeze(phase)
+phase1=deg2rad(phase)
+polarplot(phase1,mag,'linewidth',1.5)
+grid on
+[Gm Pm Wpc Wgc]=margin(sys)
+if(Wpc>Wgc)
     disp('stable')
-elseif (wpc==wgc)
+elseif(Wpc == Wgc)
     disp('marginally stable')
 else
     disp('unstable')
 end
 ```
-## Output:
-<img width="697" height="620" alt="image" src="https://github.com/user-attachments/assets/ce8668ca-fbf5-4caa-a713-611d3ad90d59" />
 
+## Output:
+
+<img width="713" height="640" alt="image" src="https://github.com/user-attachments/assets/4711b265-6492-408c-8d8f-c70d45e66a71" />
 
 ## Result:
 Thus the polar plot for the given transfer function was drawn and verified using MATLAB. <br>
-Gain margin =0.7000 dB <br>
-Phase Margin =    55.6412 deg <br>
-Gain crossover frequency = 0.8979 rad/sec <br>
-Phase crossover frequency =3.1623 rad/sec <br>
-The system is  stable
+Gain margin = 0.7 <br>
+Phase Margin = -8.8865 <br>
+Gain crossover frequency = 3.7565 <br>
+Phase crossover frequency = 3.1623 <br>
+The system is unstable.
